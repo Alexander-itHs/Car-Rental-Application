@@ -1,0 +1,108 @@
+﻿@page "/"
+@using Car_Rental.Business.Classes
+@using Car_Rental.Common.Interfaces
+@using Car_Rental.Common.Enums
+@inject BookingProcessor bookingProcessor
+@* TO-DO: IBooking *@
+
+<PageTitle>Car Rental</PageTitle>
+
+<h3>Car Rental</h3>
+
+<p>Vehicles</p>
+<table class="table table-borderless border border-secondary">
+	<thead>
+		<tr>
+			<th scope="col">RegNo</th>
+			<th scope="col">Make</th>
+			<th scope="col">Odometer</th>
+			<th scope="col">Cost Km</th>
+			<th scope="col">Vehicle Type</th>
+			<th scope="col">$ Day</th>
+			<th scope="col">Status</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var vehicle in bookingProcessor.GetVehicles())
+		{
+			<tr>
+				<th scope="row">@vehicle.RegNo</th>
+				<td>@vehicle.Make</td>
+				<td>@vehicle.Odometer</td>
+				<td>@vehicle.CostPerKm</td>
+				<td>@vehicle.VehicleType</td>
+				<td>@vehicle.CostPerDay</td>
+				
+				@if(vehicle.VehicleStatus.Equals(VehicleStatuses.Available))
+				{
+					<td><span class="badge rounded-pill bg-dark">@vehicle.VehicleStatus</span></td>
+				}
+				else
+				{
+					<td><span class="badge rounded-pill bg-danger">@vehicle.VehicleStatus</span></td>
+				}
+				
+			</tr>
+		}
+	</tbody>
+</table>
+
+<p>Bookings</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">RegNo</th>
+			<th scope="col">Customer</th>
+			<th scope="col">Km Rented</th>
+			<th scope="col">Km Returned</th>
+			<th scope="col">Rented</th>
+			<th scope="col">Returned</th>
+			<th scope="col">Cost</th>
+			<th scope="col">Status</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var booking in bookingProcessor.GetBookings())
+		{
+			<tr>
+				<th scope="row">@booking.RegNo</th>
+				<td>@booking.Customer</td>
+				<td>@booking.KmWhenRented</td>
+				<td>@booking.KmWhenReturned</td>
+				<td>@booking.DateRented</td>
+				<td>@booking.DateReturned</td>
+				<td>@booking.Cost</td>
+
+				@if (booking.BookingStatus.Equals(BookingStatuses.Closed))
+				{
+					<td><span class="badge bg-secondary">@booking.BookingStatus</span></td>
+				}
+				else
+				{
+					<td><span class="badge bg-danger">@booking.BookingStatus</span></td>
+				}
+			</tr>
+		}
+	</tbody>
+</table>
+
+<p>Customers</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">SSN</th>
+			<th scope="col">Last Name</th>
+			<th scope="col">First Name</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var customer in bookingProcessor.GetPersons())
+		{
+			<tr>
+				<th scope="row">@customer.SSN</th>
+				<td>@customer.LastName</td>
+				<td>@customer.FirstName</td>
+			</tr>
+		}	
+	</tbody>
+</table>
