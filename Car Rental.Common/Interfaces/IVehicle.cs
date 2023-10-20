@@ -12,8 +12,5 @@ public interface IVehicle
 	int CostPerDay { get; }
 	VehicleStatuses VehicleStatus { get; }
 
-	//VehicleStatuses Filter()
-	//{
-
-	//}
+	
 }

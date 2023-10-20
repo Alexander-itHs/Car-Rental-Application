@@ -9,4 +9,5 @@ public interface IData
 	IEnumerable<IVehicle> GetVehicles(VehicleStatuses status = default);
 	IEnumerable<IBooking> GetBookings();
 	
+	
 }

@@ -12,13 +12,13 @@ public class Car : IVehicle
 	public VehicleTypes VehicleType { get; }
 	public int CostPerDay { get; }
 	public VehicleStatuses VehicleStatus { get; }
-    public Car(string regNo, string make, int odometer, double costPerMile, VehicleTypes vehicleType
+    public Car(string regNo, string make, int odometer, double costPerKm, VehicleTypes vehicleType
 		, int costPerDay, VehicleStatuses vehicleStatus)
     {
         RegNo = regNo;
 		Make = make;
 		Odometer = odometer;
-		CostPerKm = costPerMile;
+		CostPerKm = costPerKm;
 		VehicleType = vehicleType;
 		CostPerDay = costPerDay;
 		VehicleStatus = vehicleStatus;

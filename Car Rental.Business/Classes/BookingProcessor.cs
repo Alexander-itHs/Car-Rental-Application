@@ -22,5 +22,5 @@ public class BookingProcessor
 	{
 		return _dataBase.GetBookings();
 	}
-
+	
 }

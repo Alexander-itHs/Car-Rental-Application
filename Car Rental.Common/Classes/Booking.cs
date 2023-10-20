@@ -6,50 +6,42 @@ namespace Car_Rental.Common.Classes;
 public class Booking : IBooking
 
 {
-	//public IVehicle Vehicle { get; }
+	public IPerson Person { get; }
+	public IVehicle Vehicle { get; }
 	public string RegNo { get; }
-
 	public string Customer { get; }
-
 	public int KmWhenRented { get; }
+	public int? KmWhenReturned { get; }
+	public DateTime DateRented { get; }
+	public DateTime? DateReturned { get; }
+	
 
-	public int KmWhenReturned { get; }
-
-	public double CostPerKm { get; }
-
-	public string DateRented { get; }
-
-	public string DateReturned { get; }
-
-	public int DaysRented { get; }
-
-	public int CostPerDay { get; }
-
-	public double Cost { get; set; }
-
+	public double? Cost { get; set; }
 	public BookingStatuses BookingStatus { get; }
 
-    public Booking(/*IVehicle vehicle,*/ string regNo, string customer, int kmWhenRented, int kmWhenReturned
-		, double costPerKm, string dateRented, string dateReturned, int daysRented
-		, int costPerDay, double cost, BookingStatuses bookingStatus)
-    {
-		//Vehicle = vehicle;
+    public Booking(IPerson person, IVehicle vehicle, string regNo
+		, string customer, int kmWhenRented, int? kmWhenReturned
+		, DateTime dateRented, DateTime? dateReturned
+		, double? cost, BookingStatuses bookingStatus)
+	{
+		Person = person;
+		Vehicle = vehicle;
 		RegNo = regNo;
 		Customer = customer;
 		KmWhenRented = kmWhenRented;
 		KmWhenReturned = kmWhenReturned;
-		CostPerKm = costPerKm;
 		DateRented = dateRented;
 		DateReturned = dateReturned;
-		DaysRented = daysRented;
-		CostPerDay = costPerDay;
-		Cost = cost;
+		CalculateCost(vehicle);
 		BookingStatus = bookingStatus;
-
     }
-	void ReturnVehicle(IVehicle vehicle)
+	public void CalculateCost(IVehicle vehicle)
 	{
-		
-		Cost = DaysRented * vehicle.CostPerDay + (KmWhenReturned - KmWhenRented) * vehicle.CostPerKm;
+		int? daysRented = (int?)(DateReturned - DateRented)?.TotalDays;
+
+		Cost = vehicle.CostPerDay * daysRented 
+			+ (KmWhenReturned - KmWhenRented) * vehicle.CostPerKm;
 	}
+	
+	
 }

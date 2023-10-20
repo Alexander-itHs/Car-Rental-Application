@@ -4,20 +4,18 @@ namespace Car_Rental.Common.Interfaces;
 
 public interface IBooking
 {
-	//IVehicle Vehicle { get; }
+	IPerson Person { get; }
+	IVehicle Vehicle { get; }
 	string RegNo { get; }
 	string Customer { get; }
 	int KmWhenRented { get; }
-	int KmWhenReturned { get; }
-	double CostPerKm { get; }
-	string DateRented { get; }
-	string DateReturned { get; }
-	int DaysRented { get; }
-	int CostPerDay { get; }
-	double Cost { get; set; }
-	//void CalculateCost(); //Beräkna och spara i cost variabeln
-	
+	int? KmWhenReturned { get; }
+	DateTime DateRented { get; }
+	DateTime? DateReturned { get; }
+	double? Cost { get; set; }
 	BookingStatuses BookingStatus { get; }
+
+	void CalculateCost(IVehicle vehicle); 
 
 
 }

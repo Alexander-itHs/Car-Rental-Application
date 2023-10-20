@@ -3,7 +3,8 @@
 @using Car_Rental.Common.Interfaces
 @using Car_Rental.Common.Enums
 @inject BookingProcessor bookingProcessor
-@* TO-DO: IBooking *@
+@* TO-DO: Booking CalulateCost med nullable-parametrar och DateTime *@
+@* Changed: SSN from int to string *@
 
 <PageTitle>Car Rental</PageTitle>
 
@@ -69,8 +70,8 @@
 				<td>@booking.Customer</td>
 				<td>@booking.KmWhenRented</td>
 				<td>@booking.KmWhenReturned</td>
-				<td>@booking.DateRented</td>
-				<td>@booking.DateReturned</td>
+				<td>@booking.DateRented.ToShortDateString()</td>
+				<td>@booking.DateReturned?.ToShortDateString()</td>
 				<td>@booking.Cost</td>
 
 				@if (booking.BookingStatus.Equals(BookingStatuses.Closed))
